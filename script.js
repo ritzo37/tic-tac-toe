@@ -87,6 +87,16 @@ function winnerCheck(board) {
     return (rowCheck() || diagonalCheck() || colnCheck());
 }
 
+function drawCheck(board) {
+    let cnt = 0 ; 
+    board.forEach(row=> {
+        row.forEach((cell)=>{
+            if (cell.getCharacter() != '') cnt++ ;
+        })
+    })
+    return (cnt == 9) ;
+}
+
 function gameControler() {
     let boardObj = gameBoard();
     const players = [
@@ -155,7 +165,7 @@ while (true) {
      let coln = prompt("Enter coln to place your char") ;
 
      if (!(row>=0 && row<=2) || !(coln>=0 && coln<=2)) {
-         console.log("Please For fuck's sake Enter valid row's and columns ! ") ; 
+         console.log("Please Enter valid row's and columns ! ") ; 
          continue ;
      }
 
