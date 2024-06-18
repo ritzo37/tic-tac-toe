@@ -3,12 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIC-TAC-TOE</title>
+    <title>TIC-TAC-TOE</title>  
     <link rel="stylesheet" href = "styles.css"></link>
 </head>
 <body>
-    <div class="header">TIC-TAC-TOE</div>
+
+    <div class="header">TIC-TAC-TOE</div>        
+    <div class="main-component">
+
+    <div class="players-info">
+    </div>
+
+    <div class="game-box">
     <div class="container"></div>
+    <div class="button-container">
+        <button class="start">Start</button>
+        <button class="restart">Restart</button>
+    </div>
+    </div>
+
+    </div>
+
+    
+    <dialog class="dialog-box">
+        <form class="dialog-form" method="dialog">
+
+            <div class="player-input">
+            <label for="player-1">Player1 : </label>
+            <input type="text" id="player-1">
+            <label for="player-2">Player2 : </label>
+            <input type="text" id="player-2">
+            </div>
+            
+            <div class="form-btn">
+            <button class="enter">Enter</button>
+            <button class="cancel">Cancel</button>
+            </div>
+
+        </form>
+    </dialog>
+
     <div class="resultDisplay"></div>
     
 </body>

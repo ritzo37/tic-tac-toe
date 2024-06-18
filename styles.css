@@ -1,28 +1,20 @@
-/* body {
-    background-color: black;
-    color : white ;
-} */
-
+body {
+    background-color: #24292E;
+    color: white;
+}
 .header {
-    font-size: 32px;
-    border: 1px solid aqua;
+    font-size: 50px;
+    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif;
     display: flex;
-    padding : 20px ;
+    /* padding : 20px ; */
     justify-content: center;
+    border-bottom: 2px solid black;
+    padding : 20px ;
 }
 
-.container {
-    /* margin-top : 40px ; */
-    display: flex;
-    flex-direction: column;
-    margin-left : auto ; 
-    margin-right:  auto;
-    /* background-color: lightblue; */
-    margin : 20px; 
-    height : 500px ;
-    width : 500px ;
-    margin-left : auto ; 
-    margin-right : auto ;
+.cell:hover {
+    background-color: rgb(82, 78, 78) ;
 }
 
 .cell {
@@ -31,9 +23,11 @@
     height : 100px ;
     width : 100px ; 
     justify-content: center;
-    background-color: red;
-    font-size : 32px ;
+    font-size : 32px ;    
+    border : 2px solid white ;
+
 }
+
 
 .row {
     display: flex;
@@ -44,6 +38,95 @@
     height: 120px ;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap : 10px ;
+}
+
 .resultDisplay {
+    margin: 50px ;;
     font-size : 30px ;
+}
+
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap : 20px ;
+    height : 200px ;
+    width : 250px ;
+}
+.player-input {
+    display: flex ;
+    flex-direction: column;
+    gap : 10px ;
+}
+
+.form-btn {
+    display: flex;
+    justify-content: center;
+    gap : 40px ;
+}
+
+button {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+button:hover {
+  background-color: #EDEFF2 ;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.players-info {
+    padding : 20px ;
+    height: fit-content;
+    flex-direction: column;
+    width: fit-content;
+    font-size:  20px ;;
+    font-size : 20px;
+    border : 2px solid white;
+    display: flex;
+    align-items: center;
+}
+
+.resultDisplay {
+    display: flex;
+    justify-content: center;
+}
+
+.main-component  {
+    padding : 60px ;
+    gap : 40px ;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.game-box {
+    /* border : 2px solid red ; */
 }

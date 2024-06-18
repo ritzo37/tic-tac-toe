@@ -141,7 +141,12 @@ function gameControler() {
 
     let activePlayer = players[0];
     const getActivePlayer = () => activePlayer;
+    const getPlayers = ()=> players ;
     const changeActivePlayer = () => activePlayer = (activePlayer == players[0]) ? players[1] : players[0];
+    const changeName = (player1,player2)=> {
+        players[0].name = player1 ;
+        players[1].name = player2 ;
+    }
 
     function playMatch(row, column) {
         let activePlayer = getActivePlayer();
@@ -166,6 +171,8 @@ function gameControler() {
         playMatch,
         getBoard , 
         getActivePlayer ,
+        changeName ,
+        players ,
     }
 }
 
@@ -179,6 +186,7 @@ function ScreenController() {
      
      const container = document.querySelector('.container');
      const resultConatiner = document.querySelector('.resultDisplay') ;
+     const playersInfo = document.querySelector('.players-info') ;
       
     const updateScreen = ()=> {
         
@@ -197,6 +205,22 @@ function ScreenController() {
             container.appendChild(row) ;
         }
 
+        let players = gameControl.players ;
+        playersInfo.textContent = ""; 
+        const p1 = document.createElement('p') ;
+        const p2 = document.createElement('p') ;
+        const player1Name = players[0].name ;
+        const player1Char = players[0].char ;
+        const player2Name = players[1].name ;
+        const player2Char = players[1].char ;
+
+        p1.textContent = `${player1Name} is playing with ${player1Char} `; 
+        p2.textContent = `${player2Name} is playing with ${player2Char}` ;
+
+        playersInfo.appendChild(p1);
+        playersInfo.appendChild(p2); 
+
+
     }
 
     container.addEventListener('click', (event)=> {
@@ -204,6 +228,7 @@ function ScreenController() {
         let coln = event.target.getAttribute("data-column") ;
         
         console.log(row + coln) ;
+        console.log(board[row][coln].getCharacter()) ;
         if (row && coln && board[row][coln].getCharacter() == '' && !gameEndFlag) {
             let result = playMatch(row,coln) ;
 
@@ -226,11 +251,56 @@ function ScreenController() {
   
     })
 
+    function resetGame() {
+        let board = gameControl.getBoard() ;
+        for (let i = 0 ; i<3 ; i++) {
+            for (let j =0 ; j<3 ; j++) {
+                board[i][j].changeCharacter("") ;
+            }
+        }
+        gameEndFlag = false ;
+        updateScreen() ;
+        resultConatiner.textContent = "" ;
+    }
+
+    const screenInterface = (()=>{
+
+        const dialogBox = document.querySelector('.dialog-box') ;
+        const startbtn = document.querySelector('.button-container .start');
+        const enterbtn = document.querySelector('.enter') ;
+        const restartButton = document.querySelector('.restart') ;
+        
+        restartButton.addEventListener('click',()=>{
+            gameControl.changeName("Player-1","Player-2") ;
+            resetGame() ;
+        }) ;
+
+        enterbtn.addEventListener('click',()=>{
+
+            const inputFieldForPlayer1 = document.querySelector('#player-1') ;
+            const inputFieldForPlayer2 = document.querySelector('#player-2') ;
+            const player1Name = inputFieldForPlayer1.value ;
+            const player2Name = inputFieldForPlayer2.value ; 
+            inputFieldForPlayer1.value = "" ;
+            inputFieldForPlayer2.value = "" ;
+          
+            if (player1Name && player2Name) {
+                gameControl.changeName(player1Name,player2Name) ;
+            }       
+            resetGame() ;
+            
+        })
+        startbtn.addEventListener('click',()=>{
+            dialogBox.showModal() ;
+        })
+    })();
+
     return { 
         updateScreen , 
     }
 
 }
+
 
 const Screen = ScreenController() ; 
 Screen.updateScreen() ;
