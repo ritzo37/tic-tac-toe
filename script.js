@@ -41,10 +41,6 @@ function winnerCheck(board) {
         boardValues.push(currRowValues);
     }
 
-    for (let i = 0 ; i<3 ; i++) {
-        console.log(boardValues[i]) ;
-    }
-
     function rowCheck() {
         for (let i = 0; i < 3; i++) {
             let xCnt = 0, oCnt = 0;
@@ -56,7 +52,6 @@ function winnerCheck(board) {
                 }
             }) 
             if (xCnt == 3 || oCnt == 3) {
-                console.log("Row Check True") ;
                 return true ;
             }
            
@@ -74,7 +69,6 @@ function winnerCheck(board) {
                 }
             }
             if (xCnt ==3 || oCnt ==3 ) {
-                console.log("Coln Check true") ; 
                 return true ;
             }
         }
@@ -141,26 +135,31 @@ function gameControler() {
 
     let activePlayer = players[0];
     const getActivePlayer = () => activePlayer;
-    const getPlayers = ()=> players ;
-    const changeActivePlayer = () => activePlayer = (activePlayer == players[0]) ? players[1] : players[0];
+    const changeActivePlayer = () => activePlayer = (activePlayer == players[0]) ? players[1] : players[0];   
     const changeName = (player1,player2)=> {
         players[0].name = player1 ;
         players[1].name = player2 ;
     }
 
     function playMatch(row, column) {
+
         let activePlayer = getActivePlayer();
         let currCharacter = activePlayer.char;
+
         let board = boardObj.getBoard();
         board[row][column].changeCharacter(currCharacter);
-        let gameEndFlag = winnerCheck(board);
+
+        let winFlag = winnerCheck(board);
         let drawFlag = drawCheck(board); 
-        if (gameEndFlag) {
+
+        if (winFlag) {
             return "WIN"; 
         } 
+
         if (drawFlag) {
             return "DRAW" ;
         }
+
         changeActivePlayer();
         return "CONTINUE" ;
     }
@@ -207,6 +206,7 @@ function ScreenController() {
 
         let players = gameControl.players ;
         playersInfo.textContent = ""; 
+
         const p1 = document.createElement('p') ;
         const p2 = document.createElement('p') ;
         const player1Name = players[0].name ;
@@ -224,14 +224,12 @@ function ScreenController() {
     }
 
     container.addEventListener('click', (event)=> {
+
         let row = event.target.getAttribute("data-row") ;
         let coln = event.target.getAttribute("data-column") ;
         
-        console.log(row + coln) ;
-        console.log(board[row][coln].getCharacter()) ;
         if (row && coln && board[row][coln].getCharacter() == '' && !gameEndFlag) {
             let result = playMatch(row,coln) ;
-
             if (result == "WIN") {
                 updateScreen() ;
                 gameEndFlag = true ;
@@ -248,7 +246,6 @@ function ScreenController() {
                 updateScreen() ;
             }
         }
-  
     })
 
     function resetGame() {
@@ -271,7 +268,6 @@ function ScreenController() {
         const restartButton = document.querySelector('.restart') ;
         
         restartButton.addEventListener('click',()=>{
-            gameControl.changeName("Player-1","Player-2") ;
             resetGame() ;
         }) ;
 
